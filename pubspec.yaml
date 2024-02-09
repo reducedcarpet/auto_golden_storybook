@@ -19,7 +19,6 @@ dependencies:
   path: ^1.8.2
   yaml: ^3.1.2
 
-
   code_builder: ^4.10.0
   dart_style: ^2.3.4
   storybook_flutter: ^0.14.0
@@ -30,9 +29,15 @@ dependencies:
 
 
 dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
   # Needed by build_version
   build_runner: ^2.4.8
   # https://pub.dev/packages/build_version
   build_version: ^2.1.1
 
   lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
