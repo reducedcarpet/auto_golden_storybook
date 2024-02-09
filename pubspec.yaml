@@ -3,7 +3,7 @@ description: "Auto generates a web storybook from your golden tests in a subdire
 repository: https://github.com/reducedcarpet/auto_golden_storybook
 homepage: https://github.com/reducedcarpet/auto_golden_storybook
 
-version: 0.1.0
+version: 0.1.1
 
 
 environment:
