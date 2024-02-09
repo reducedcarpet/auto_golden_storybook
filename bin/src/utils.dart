@@ -31,10 +31,13 @@ Future<String?> getProjectName() async {
     // Parse the content of the pubspec.yaml file
     final doc = loadYaml(pubspecContent);
 
-    // Extract the package name
-    final projectName = doc['auto_golden_storybook']['name'];
+    String? projectName;
 
-    print("FOUND STORY BOOK NAME: $projectName");
+    // Extract the package name
+    if(doc['auto_golden_storybook'] != null) {
+      projectName = doc['auto_golden_storybook']['name'];
+    }
+
     return projectName?.toString();
   } catch (e) {
     print('Error reading pubspec.yaml: $e');

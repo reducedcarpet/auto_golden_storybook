@@ -31,7 +31,7 @@ Future<void> moveGoldensToAssets(String projectName) async {
 }
 
 String subtractTestPath(FileSystemEntity image) {
-  final String currentDirectory = Directory.current.path + "\\test";
+  final String currentDirectory = Directory.current.path + "/test";
   String relative = path.relative(image.path, from: currentDirectory);
   return relative;
 }
@@ -82,7 +82,7 @@ String getPascalCaseName(FileSystemEntity image) {
 Future<List<FileSystemEntity>> findAllGoldenImages() async {
   final String currentDirectory = Directory.current.path;
 
-  final dir = Directory('$currentDirectory\\test');
+  final dir = Directory('$currentDirectory/test');
   final List<FileSystemEntity> entities = await checkDirectoryForImages(dir);
   return entities;
 }
