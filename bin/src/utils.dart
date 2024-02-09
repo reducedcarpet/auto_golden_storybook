@@ -34,7 +34,7 @@ Future<String?> getProjectName() async {
     String? projectName;
 
     // Extract the package name
-    if(doc['auto_golden_storybook'] != null) {
+    if (doc['auto_golden_storybook'] != null) {
       projectName = doc['auto_golden_storybook']['name'];
     }
 
@@ -44,5 +44,3 @@ Future<String?> getProjectName() async {
     return null;
   }
 }
-
-

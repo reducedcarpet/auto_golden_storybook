@@ -29,7 +29,10 @@ Future<void> main(List<String> args) async {
   );
 }
 
-Future<void> createFlutterWebProject(String projectName, String superPackageName) async {
+Future<void> createFlutterWebProject(
+  String projectName,
+  String superPackageName,
+) async {
   // TODO check first for test directory to find goldens.
 
   final int exitCode = await flutterCreateWeb(projectName);
@@ -53,18 +56,27 @@ Future<void> createFlutterWebProject(String projectName, String superPackageName
 Future<void> generateGoldenCode(String projectName) async {
   // generate code
   await codeGenGoldens(projectName);
-  Logger.standard().stdout('Project $projectName generated goldens successfully.');
+  Logger.standard().stdout(
+    'Project $projectName generated goldens successfully.',
+  );
 
   await moveGoldensToAssets(projectName);
-  Logger.standard()
-      .stdout('Project $projectName copied golden images to assets successfully.');
+  Logger.standard().stdout(
+    'Project $projectName copied golden images to assets successfully.',
+  );
 
   saveGeneratedStoryFile(projectName);
-  Logger.standard().stdout('Project $projectName generated stories.dart successfully.');
+  Logger.standard().stdout(
+    'Project $projectName generated stories.dart successfully.',
+  );
 
   saveGeneratedMainFile(projectName);
-  Logger.standard().stdout('Project $projectName generated main.dart successfully.');
+  Logger.standard().stdout(
+    'Project $projectName generated main.dart successfully.',
+  );
 
   saveGeneratedPubSpecFile(projectName);
-  Logger.standard().stdout('Project $projectName generated pubspec.yaml successfully.');
+  Logger.standard().stdout(
+    'Project $projectName generated pubspec.yaml successfully.',
+  );
 }
