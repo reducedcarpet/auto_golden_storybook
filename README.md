@@ -25,6 +25,8 @@ By default the created web project will be called: "storybook". It will assume y
 
 ## Roadmap
 Automatically choose frame based on golden image size. 
+Create Example
+More Configuration Options
 
 ## Contributing
 Please suggest features or bugs on the issue tracker in Github. 
