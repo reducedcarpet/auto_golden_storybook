@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:auto_golden_storybook/code_gen/code_gen_constants.dart';
+import 'code_gen_constants.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 

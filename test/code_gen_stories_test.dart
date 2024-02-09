@@ -1,4 +1,4 @@
-import 'package:auto_golden_storybook/code_gen/code_gen_stories.dart';
+import '../bin/src/code_gen/code_gen_stories.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
 

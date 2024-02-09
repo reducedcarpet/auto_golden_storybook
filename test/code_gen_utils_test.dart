@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:auto_golden_storybook/code_gen/code_gen_utils.dart';
+import '../bin/src/code_gen/code_gen_utils.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
