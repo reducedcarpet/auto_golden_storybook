@@ -39,7 +39,8 @@ String subtractTestPath(FileSystemEntity image) {
 String relativePath(FileSystemEntity image) {
   String relative = subtractTestPath(image);
   // strip file name
-  relative = relative.substring(0, relative.lastIndexOf(path.basename(image.path)));
+  relative =
+      relative.substring(0, relative.lastIndexOf(path.basename(image.path)));
   relative = relative.replaceAll("\\", "/");
   return relative;
 }

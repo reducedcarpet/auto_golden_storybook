@@ -48,8 +48,9 @@ String generateImagePage(FileSystemEntity image) {
                     .constInstance(
                       [],
                       {
-                        'image': refer('AssetImage', 'package:flutter/painting.dart')
-                            .newInstance(
+                        'image':
+                            refer('AssetImage', 'package:flutter/painting.dart')
+                                .newInstance(
                           [
                             literalString("assets/${encodedImagePath(image)}"),
                           ],
@@ -101,6 +102,7 @@ Future<void> codeGenGoldens(String projectName) async {
         : relative;
 
     final imagePage = generateImagePage(image);
-    await saveGeneratedPage('$projectName/lib/generated/$encodedName', imagePage);
+    await saveGeneratedPage(
+        '$projectName/lib/generated/$encodedName', imagePage);
   }
 }

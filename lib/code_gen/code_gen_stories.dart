@@ -90,7 +90,8 @@ Future<List<Directive>> generateAllDirectives(
   return directives;
 }
 
-Future<List<Expression>> generateAllStories(List<FileSystemEntity> goldenImages) async {
+Future<List<Expression>> generateAllStories(
+    List<FileSystemEntity> goldenImages) async {
   final List<Expression> stories = [];
 
   for (final FileSystemEntity image in goldenImages) {
