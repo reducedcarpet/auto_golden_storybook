@@ -1,0 +1,35 @@
+name: auto_golden_storybook
+description: "Auto generates a storybook from your golden tests."
+repository: https://github.com/reducedcarpet/auto_golden_storybook
+homepage: https://github.com/reducedcarpet/auto_golden_storybook
+
+version: 0.1.0
+
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+
+dependencies:
+  args: ^2.3.2
+  cli_util: ^0.4.0
+  path: ^1.8.2
+  yaml: ^3.1.2
+
+
+  code_builder: ^4.10.0
+  dart_style: ^2.3.4
+  storybook_flutter: ^0.14.0
+  recase: ^4.1.0
+  source_gen: ^1.5.0
+  analyzer: ^6.2.0
+  logging: ^1.0.0
+
+
+dev_dependencies:
+  # Needed by build_version
+  build_runner: ^2.4.8
+  # https://pub.dev/packages/build_version
+  build_version: ^2.1.1
+
+  lints: ^3.0.0
