@@ -23,18 +23,22 @@ Future<void> main(List<String> args) async {
 
   final superProjectName = await getPackageName();
 
+  String? testDirectory = parsedArgs['test_dir'] as String?;
+  testDirectory ??= await getProjectArgument("test_dir");
+  
+
   createFlutterWebProject(
     projectName ?? projectNameDefault,
     superProjectName!,
+    testDirectory ?? testDirectoryDefault,
   );
 }
 
 Future<void> createFlutterWebProject(
   String projectName,
   String superPackageName,
+  String testDirectory,
 ) async {
-  // TODO check first for test directory to find goldens.
-
   final int exitCode = await flutterCreateWeb(projectName);
 
   if (exitCode != 0) {
@@ -46,26 +50,28 @@ Future<void> createFlutterWebProject(
   deleteTestDirectory(projectName);
   Logger.standard().stdout('Deleted Test Directory of new Project.');
 
-  await generateGoldenCode(projectName);
+  await generateGoldenCode(projectName, testDirectory);
 
   await dartFixApply(projectName);
 
   await flutterBuildWeb(projectName);
 }
 
-Future<void> generateGoldenCode(String projectName) async {
+Future<void> generateGoldenCode(String projectName, String testDirectory) async {
+  // TODO check first for test directory to find goldens.
+
   // generate code
-  await codeGenGoldens(projectName);
+  await codeGenGoldens(projectName, testDirectory);
   Logger.standard().stdout(
     'Project $projectName generated goldens successfully.',
   );
 
-  await moveGoldensToAssets(projectName);
+  await moveGoldensToAssets(projectName, testDirectory);
   Logger.standard().stdout(
     'Project $projectName copied golden images to assets successfully.',
   );
 
-  saveGeneratedStoryFile(projectName);
+  saveGeneratedStoryFile(projectName, testDirectory);
   Logger.standard().stdout(
     'Project $projectName generated stories.dart successfully.',
   );

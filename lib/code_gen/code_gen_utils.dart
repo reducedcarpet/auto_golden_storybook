@@ -8,13 +8,13 @@ Future<void> saveGeneratedPage(String fileName, String contents) async {
   await file.writeAsString(contents);
 }
 
-Future<void> moveGoldensToAssets(String projectName) async {
+Future<void> moveGoldensToAssets(String projectName, String testDirectory) async {
   Directory assetsDir = Directory('$projectName/assets');
   if (!await assetsDir.exists()) {
     await assetsDir.create();
   }
 
-  final goldenImages = await findAllGoldenImages();
+  final goldenImages = await findAllGoldenImages(testDirectory);
   for (final FileSystemEntity image in goldenImages) {
     var entityType = await FileSystemEntity.type(image.path);
     if (entityType != FileSystemEntityType.file) {
@@ -84,10 +84,10 @@ String getPascalCaseName(FileSystemEntity image) {
   return basename;
 }
 
-Future<List<FileSystemEntity>> findAllGoldenImages() async {
+Future<List<FileSystemEntity>> findAllGoldenImages(String testDirectory) async {
   final String currentDirectory = Directory.current.path;
 
-  final dir = Directory('$currentDirectory/test');
+  final dir = Directory('$currentDirectory/$testDirectory');
   final List<FileSystemEntity> entities = await checkDirectoryForImages(dir);
   return entities;
 }

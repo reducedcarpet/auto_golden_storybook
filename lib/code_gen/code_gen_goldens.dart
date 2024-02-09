@@ -81,8 +81,8 @@ String generateImagePage(FileSystemEntity image) {
   return DartFormatter().format('${library.accept(emitter)}');
 }
 
-Future<void> codeGenGoldens(String projectName) async {
-  final goldenImages = await findAllGoldenImages();
+Future<void> codeGenGoldens(String projectName, String testDirectory) async {
+  final goldenImages = await findAllGoldenImages(testDirectory);
   Directory generateDir = Directory('$projectName/lib/generated');
   if (!await generateDir.exists()) {
     await generateDir.create();
@@ -103,6 +103,6 @@ Future<void> codeGenGoldens(String projectName) async {
 
     final imagePage = generateImagePage(image);
     await saveGeneratedPage(
-        '$projectName/lib/generated/$encodedName', imagePage);
+        '$projectName/lib/generated/$encodedName', imagePage,);
   }
 }

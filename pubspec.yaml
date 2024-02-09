@@ -1,5 +1,5 @@
 name: auto_golden_storybook
-description: "Auto generates a web storybook from your golden tests in a subdirectory of your project."
+description: "Auto generates a storybook from your golden test images. This is generated as a web project in a subdirectory in your project and can be immediately deployed."
 repository: https://github.com/reducedcarpet/auto_golden_storybook
 homepage: https://github.com/reducedcarpet/auto_golden_storybook
 

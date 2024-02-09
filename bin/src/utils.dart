@@ -22,6 +22,10 @@ Future<String?> getPackageName() async {
 }
 
 Future<String?> getProjectName() async {
+  return getProjectArgument('name');
+}
+
+Future<String?> getProjectArgument(String arg) async {
   // Path to the pubspec.yaml file
   const pubspecPath = 'pubspec.yaml';
   try {
@@ -35,7 +39,7 @@ Future<String?> getProjectName() async {
 
     // Extract the package name
     if (doc['auto_golden_storybook'] != null) {
-      projectName = doc['auto_golden_storybook']['name'];
+      projectName = doc['auto_golden_storybook'][arg];
     }
 
     return projectName?.toString();

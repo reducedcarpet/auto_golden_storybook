@@ -9,8 +9,8 @@ import 'package:recase/recase.dart';
 
 import 'code_gen_constants.dart';
 
-Future<String> generateStoryFile(String projectName) async {
-  final List<FileSystemEntity> goldenImages = await findAllGoldenImages();
+Future<String> generateStoryFile(String projectName, String testDirectory) async {
+  final List<FileSystemEntity> goldenImages = await findAllGoldenImages(testDirectory);
   final List<Expression> stories = await generateAllStories(goldenImages);
   final List<Directive> directives = await generateAllDirectives(
     goldenImages,
@@ -39,8 +39,8 @@ Future<String> generateStoryFile(String projectName) async {
   return DartFormatter().format('${library.accept(emitter)}');
 }
 
-Future<void> saveGeneratedStoryFile(String projectName) async {
-  final content = generateStoryFile(projectName);
+Future<void> saveGeneratedStoryFile(String projectName, String testDirectory) async {
+  final content = generateStoryFile(projectName,testDirectory);
   final file = File('$projectName/lib/generated/$storiesFileName');
   file.writeAsStringSync(await content);
 }
