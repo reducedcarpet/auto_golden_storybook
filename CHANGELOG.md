@@ -1,3 +1,8 @@
+## 0.1.3
+
+- Better golden image container, scales away the border created by golden images. 
+- Also wraps it in a ListView so it can scroll. 
+
 ## 0.1.2
 
 - Added example in example directory

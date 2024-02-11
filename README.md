@@ -27,6 +27,10 @@ dart run auto_golden_storybook:create --name=project_storybook --test_dir="test/
 
 By default the created web project will be called: "storybook". It will assume your test directory is called "test" and will generate stories for all png images found in all subdirectories of the test directory.
 
+There are a couple of generated files you can change for your own purposes, device_frame.dart and golden_image_container.dart. The device frame is part of the Storybook package and you can change that to use which ever frame you choose as a default. 
+
+golden_image_container.dart is a widget that wraps the golden image in a container and scales away the border created by golden images. It also wraps it in a ListView so it can scroll. You can change how much scale it adds to deal with your own golden images.
+
 ## Roadmap
 Automatically choose frame based on golden image size.
 More Configuration Options
