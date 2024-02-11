@@ -1,4 +1,6 @@
 import 'package:args/args.dart';
+import 'src/code_gen/code_gen_device_frame.dart';
+import 'src/code_gen/code_gen_golden_container.dart';
 import 'src/code_gen/code_gen_goldens.dart';
 import 'src/code_gen/code_gen_main.dart';
 import 'src/code_gen/code_gen_pubspec_yaml.dart';
@@ -15,15 +17,16 @@ Future<void> main(List<String> args) async {
   final parser = ArgParser();
 
   parser.addOption('name');
+  parser.addOption('test_dir');
 
   final parsedArgs = parser.parse(args);
 
-  String? projectName = parsedArgs['name'] as String?;
+  String? projectName = parsedArgs['name'];
   projectName ??= await getProjectName();
 
   final superProjectName = await getPackageName();
 
-  String? testDirectory = parsedArgs['test_dir'] as String?;
+  String? testDirectory = parsedArgs['test_dir'];
   testDirectory ??= await getProjectArgument("test_dir");
   
 
@@ -69,6 +72,16 @@ Future<void> generateGoldenCode(String projectName, String testDirectory) async 
   await moveGoldensToAssets(projectName, testDirectory);
   Logger.standard().stdout(
     'Project $projectName copied golden images to assets successfully.',
+  );
+
+  saveGeneratedDeviceFrameFile(projectName, testDirectory);
+  Logger.standard().stdout(
+    'Project $projectName generated device_frame.dart successfully.',
+  );
+
+  saveGeneratedGoldenContainerFile(projectName, testDirectory);
+  Logger.standard().stdout(
+    'Project $projectName generated golden_image_container.dart for story widgets successfully.',
   );
 
   saveGeneratedStoryFile(projectName, testDirectory);

@@ -40,7 +40,7 @@ Future<String> generateStoryFile(String projectName, String testDirectory) async
 }
 
 Future<void> saveGeneratedStoryFile(String projectName, String testDirectory) async {
-  final content = generateStoryFile(projectName,testDirectory);
+  final content = generateStoryFile(projectName, testDirectory);
   final file = File('$projectName/lib/generated/$storiesFileName');
   file.writeAsStringSync(await content);
 }
@@ -90,8 +90,7 @@ Future<List<Directive>> generateAllDirectives(
   return directives;
 }
 
-Future<List<Expression>> generateAllStories(
-    List<FileSystemEntity> goldenImages) async {
+Future<List<Expression>> generateAllStories(List<FileSystemEntity> goldenImages) async {
   final List<Expression> stories = [];
 
   for (final FileSystemEntity image in goldenImages) {

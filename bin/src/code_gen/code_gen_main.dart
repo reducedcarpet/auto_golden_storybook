@@ -26,6 +26,7 @@ String generateMainFile(String projectName) {
           Directive.import('package:storybook_flutter/storybook_flutter.dart'),
           Directive.import('package:flutter/material.dart'),
           Directive.import('package:$projectName/generated/$storiesFileName'),
+          Directive.import('package:$projectName/generated/$deviceFrameFileName'),
         ],
       ),
   );
@@ -81,19 +82,6 @@ String generateMainFile(String projectName) {
             )
             ..body = Block.of(
               [
-                refer('final device')
-                    .assign(
-                      refer('DeviceInfo.genericPhone').call(
-                        [],
-                        {
-                          'platform': refer('TargetPlatform.iOS'),
-                          'id': refer('"id"'),
-                          'name': refer('"IPhone"'),
-                          'screenSize': refer('const Size(428, 926)'),
-                        },
-                      ),
-                    )
-                    .statement,
                 refer('Storybook')
                     .newInstance(
                       [],

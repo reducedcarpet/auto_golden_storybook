@@ -36,11 +36,10 @@ packages:
   auto_golden_storybook:
     dependency: "direct dev"
     description:
-      name: auto_golden_storybook
-      sha256: "07da588d774998b5e1201e90ab9c489b31bd7a727e69ddb54e03238bc3c21bd1"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.1"
+      path: ".."
+      relative: true
+    source: path
+    version: "0.1.2"
   boolean_selector:
     dependency: transitive
     description:

@@ -5,7 +5,7 @@ import 'package:code_builder/code_builder.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as path;
 
-String generateImagePage(FileSystemEntity image) {
+String generateImagePage(FileSystemEntity image, String projectName) {
   String basename = getPascalCaseName(image);
 
   final imagePage = Class(
@@ -44,13 +44,12 @@ String generateImagePage(FileSystemEntity image) {
             )
             ..body = Block.of(
               [
-                refer('Image', 'package:flutter/material.dart')
+                refer('GoldenImageContainer', 'package:flutter/material.dart')
                     .constInstance(
                       [],
                       {
-                        'image':
-                            refer('AssetImage', 'package:flutter/painting.dart')
-                                .newInstance(
+                        'image': refer('AssetImage', 'package:flutter/painting.dart')
+                            .newInstance(
                           [
                             literalString("assets/${encodedImagePath(image)}"),
                           ],
@@ -71,7 +70,7 @@ String generateImagePage(FileSystemEntity image) {
       ..directives.addAll(
         [
           Directive.import('package:flutter/material.dart'),
-          Directive.import('package:flutter/painting.dart'),
+          Directive.import('package:$projectName/generated/golden_image_container.dart'),
         ],
       ),
   );
@@ -101,8 +100,10 @@ Future<void> codeGenGoldens(String projectName, String testDirectory) async {
         ? '${path.withoutExtension(relative)}.g.dart'
         : relative;
 
-    final imagePage = generateImagePage(image);
+    final imagePage = generateImagePage(image, projectName);
     await saveGeneratedPage(
-        '$projectName/lib/generated/$encodedName', imagePage,);
+      '$projectName/lib/generated/$encodedName',
+      imagePage,
+    );
   }
 }
