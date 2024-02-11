@@ -5,7 +5,8 @@ import 'package:dart_style/dart_style.dart';
 
 import 'code_gen_constants.dart';
 
-Future<String> generateDeviceFile(String projectName, String testDirectory) async {
+Future<String> generateDeviceFile(
+    String projectName, String testDirectory) async {
   final deviceField = refer('final device')
       .assign(
         refer('DeviceInfo.genericPhone').call(

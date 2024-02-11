@@ -3,7 +3,7 @@ description: "Auto generates a storybook from your golden test images. This is g
 repository: https://github.com/reducedcarpet/auto_golden_storybook
 homepage: https://github.com/reducedcarpet/auto_golden_storybook
 
-version: 0.1.3
+version: 0.1.4
 
 
 environment:

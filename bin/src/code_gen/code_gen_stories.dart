@@ -9,8 +9,10 @@ import 'package:recase/recase.dart';
 
 import 'code_gen_constants.dart';
 
-Future<String> generateStoryFile(String projectName, String testDirectory) async {
-  final List<FileSystemEntity> goldenImages = await findAllGoldenImages(testDirectory);
+Future<String> generateStoryFile(
+    String projectName, String testDirectory) async {
+  final List<FileSystemEntity> goldenImages =
+      await findAllGoldenImages(testDirectory);
   final List<Expression> stories = await generateAllStories(goldenImages);
   final List<Directive> directives = await generateAllDirectives(
     goldenImages,
@@ -39,7 +41,8 @@ Future<String> generateStoryFile(String projectName, String testDirectory) async
   return DartFormatter().format('${library.accept(emitter)}');
 }
 
-Future<void> saveGeneratedStoryFile(String projectName, String testDirectory) async {
+Future<void> saveGeneratedStoryFile(
+    String projectName, String testDirectory) async {
   final content = generateStoryFile(projectName, testDirectory);
   final file = File('$projectName/lib/generated/$storiesFileName');
   file.writeAsStringSync(await content);
@@ -90,7 +93,8 @@ Future<List<Directive>> generateAllDirectives(
   return directives;
 }
 
-Future<List<Expression>> generateAllStories(List<FileSystemEntity> goldenImages) async {
+Future<List<Expression>> generateAllStories(
+    List<FileSystemEntity> goldenImages) async {
   final List<Expression> stories = [];
 
   for (final FileSystemEntity image in goldenImages) {

@@ -1,3 +1,7 @@
+## 0.1.4
+
+- Dart formatted bin directory.
+
 ## 0.1.3
 
 - Better golden image container, scales away the border created by golden images. 

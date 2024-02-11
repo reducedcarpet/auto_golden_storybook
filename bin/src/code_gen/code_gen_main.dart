@@ -26,7 +26,8 @@ String generateMainFile(String projectName) {
           Directive.import('package:storybook_flutter/storybook_flutter.dart'),
           Directive.import('package:flutter/material.dart'),
           Directive.import('package:$projectName/generated/$storiesFileName'),
-          Directive.import('package:$projectName/generated/$deviceFrameFileName'),
+          Directive.import(
+              'package:$projectName/generated/$deviceFrameFileName'),
         ],
       ),
   );

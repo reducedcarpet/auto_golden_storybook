@@ -8,7 +8,8 @@ Future<void> saveGeneratedPage(String fileName, String contents) async {
   await file.writeAsString(contents);
 }
 
-Future<void> moveGoldensToAssets(String projectName, String testDirectory) async {
+Future<void> moveGoldensToAssets(
+    String projectName, String testDirectory) async {
   Directory assetsDir = Directory('$projectName/assets');
   if (!await assetsDir.exists()) {
     await assetsDir.create();

@@ -28,7 +28,6 @@ Future<void> main(List<String> args) async {
 
   String? testDirectory = parsedArgs['test_dir'];
   testDirectory ??= await getProjectArgument("test_dir");
-  
 
   createFlutterWebProject(
     projectName ?? projectNameDefault,
@@ -60,7 +59,8 @@ Future<void> createFlutterWebProject(
   await flutterBuildWeb(projectName);
 }
 
-Future<void> generateGoldenCode(String projectName, String testDirectory) async {
+Future<void> generateGoldenCode(
+    String projectName, String testDirectory) async {
   // TODO check first for test directory to find goldens.
 
   // generate code

@@ -48,8 +48,9 @@ String generateImagePage(FileSystemEntity image, String projectName) {
                     .constInstance(
                       [],
                       {
-                        'image': refer('AssetImage', 'package:flutter/painting.dart')
-                            .newInstance(
+                        'image':
+                            refer('AssetImage', 'package:flutter/painting.dart')
+                                .newInstance(
                           [
                             literalString("assets/${encodedImagePath(image)}"),
                           ],
@@ -70,7 +71,8 @@ String generateImagePage(FileSystemEntity image, String projectName) {
       ..directives.addAll(
         [
           Directive.import('package:flutter/material.dart'),
-          Directive.import('package:$projectName/generated/golden_image_container.dart'),
+          Directive.import(
+              'package:$projectName/generated/golden_image_container.dart'),
         ],
       ),
   );
