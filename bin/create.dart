@@ -3,6 +3,7 @@ import 'src/code_gen/code_gen_device_frame.dart';
 import 'src/code_gen/code_gen_golden_container.dart';
 import 'src/code_gen/code_gen_goldens.dart';
 import 'src/code_gen/code_gen_main.dart';
+import 'src/code_gen/code_gen_manual_stories.dart';
 import 'src/code_gen/code_gen_pubspec_yaml.dart';
 import 'src/code_gen/code_gen_stories.dart';
 import 'src/code_gen/code_gen_utils.dart';
@@ -87,6 +88,11 @@ Future<void> generateGoldenCode(
   saveGeneratedStoryFile(projectName, testDirectory);
   Logger.standard().stdout(
     'Project $projectName generated stories.dart successfully.',
+  );
+
+  saveGeneratedManualStoryFile(projectName, testDirectory);
+  Logger.standard().stdout(
+    'Project $projectName generated manual_stories.dart successfully.',
   );
 
   saveGeneratedMainFile(projectName);

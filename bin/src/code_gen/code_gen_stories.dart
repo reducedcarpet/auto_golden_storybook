@@ -10,27 +10,43 @@ import 'package:recase/recase.dart';
 import 'code_gen_constants.dart';
 
 Future<String> generateStoryFile(
-    String projectName, String testDirectory) async {
-  final List<FileSystemEntity> goldenImages =
-      await findAllGoldenImages(testDirectory);
+  String projectName,
+  String testDirectory,
+) async {
+  final List<FileSystemEntity> goldenImages = await findAllGoldenImages(
+    testDirectory,
+  );
   final List<Expression> stories = await generateAllStories(goldenImages);
+
+  // Reference to `manualStories`
+  final Expression manualStoriesReference = refer('...manualStories');
+  stories.add(manualStoriesReference);
+
   final List<Directive> directives = await generateAllDirectives(
     goldenImages,
     projectName,
   );
 
-  final field = Field((b) => b
-    ..name = 'stories'
-    ..type = refer('List<Story>')
-    ..modifier = FieldModifier.final$
-    ..assignment = literalList(stories, refer('Story')).code);
+  final field = Field(
+    (b) => b
+      ..name = 'stories'
+      ..type = refer('List<Story>')
+      ..modifier = FieldModifier.final$
+      ..assignment = literalList(
+        stories,
+        refer('Story'),
+      ).code,
+  );
 
   final library = Library(
     (b) => b
       ..body.add(field)
       ..directives.addAll(
         [
-          Directive.import('package:storybook_flutter/storybook_flutter.dart'),
+          Directive.import(
+            'package:storybook_flutter/storybook_flutter.dart',
+          ),
+          Directive.import('manual_stories.dart'),
           ...directives,
         ],
       ),
@@ -42,13 +58,24 @@ Future<String> generateStoryFile(
 }
 
 Future<void> saveGeneratedStoryFile(
-    String projectName, String testDirectory) async {
-  final content = generateStoryFile(projectName, testDirectory);
-  final file = File('$projectName/lib/generated/$storiesFileName');
+  String projectName,
+  String testDirectory,
+) async {
+  final content = generateStoryFile(
+    projectName,
+    testDirectory,
+  );
+  final file = File(
+    '$projectName/lib/generated/$storiesFileName',
+  );
   file.writeAsStringSync(await content);
 }
 
-Expression generateStoryObjectForImage(String image, String path, String name) {
+Expression generateStoryObjectForImage(
+  String image,
+  String path,
+  String name,
+) {
   final field = refer('Story').newInstance(
     [],
     {
@@ -56,7 +83,9 @@ Expression generateStoryObjectForImage(String image, String path, String name) {
       'builder': Method(
         (b) => b
           ..lambda = true
-          ..requiredParameters.add(Parameter((b) => b..name = '_'))
+          ..requiredParameters.add(
+            Parameter((b) => b..name = '_'),
+          )
           ..body = refer('${image}StorybookScreen').constInstance(
             [],
           ).code,
@@ -67,8 +96,13 @@ Expression generateStoryObjectForImage(String image, String path, String name) {
   return field;
 }
 
-Directive generateDirectiveForImage(String image, String projectName) {
-  return Directive.import('package:$projectName/generated/$image.g.dart');
+Directive generateDirectiveForImage(
+  String image,
+  String projectName,
+) {
+  return Directive.import(
+    'package:$projectName/generated/$image.g.dart',
+  );
 }
 
 Future<List<Directive>> generateAllDirectives(
@@ -78,7 +112,9 @@ Future<List<Directive>> generateAllDirectives(
   final List<Directive> directives = [];
 
   for (final FileSystemEntity image in goldenImages) {
-    var entityType = await FileSystemEntity.type(image.path);
+    var entityType = await FileSystemEntity.type(
+      image.path,
+    );
     if (entityType != FileSystemEntityType.file) {
       continue;
     }
@@ -87,18 +123,26 @@ Future<List<Directive>> generateAllDirectives(
 
     final relative = encodedDartPath(image);
 
-    directives.add(generateDirectiveForImage(relative, projectName));
+    directives.add(
+      generateDirectiveForImage(
+        relative,
+        projectName,
+      ),
+    );
   }
 
   return directives;
 }
 
 Future<List<Expression>> generateAllStories(
-    List<FileSystemEntity> goldenImages) async {
+  List<FileSystemEntity> goldenImages,
+) async {
   final List<Expression> stories = [];
 
   for (final FileSystemEntity image in goldenImages) {
-    var entityType = await FileSystemEntity.type(image.path);
+    var entityType = await FileSystemEntity.type(
+      image.path,
+    );
     if (entityType != FileSystemEntityType.file) {
       continue;
     }
@@ -106,7 +150,9 @@ Future<List<Expression>> generateAllStories(
     Logger.standard().stdout('Generating Story object for $image');
 
     String basename = getPascalCaseName(image);
-    String originalName = path.basenameWithoutExtension(image.path);
+    String originalName = path.basenameWithoutExtension(
+      image.path,
+    );
     originalName = ReCase(originalName).pascalCase;
 
     String relative = relativePath(image);

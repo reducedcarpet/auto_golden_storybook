@@ -21,8 +21,7 @@ String generateImagePage(FileSystemEntity image, String projectName) {
                 (b) => b
                   ..name = 'key'
                   ..toSuper = true // Forward to the super class constructor
-                  ..named = true
-                  ..type = refer('Key?', 'package:flutter/material.dart'),
+                  ..named = true,
               ),
             ),
         ),
@@ -48,9 +47,8 @@ String generateImagePage(FileSystemEntity image, String projectName) {
                     .constInstance(
                       [],
                       {
-                        'image':
-                            refer('AssetImage', 'package:flutter/painting.dart')
-                                .newInstance(
+                        'image': refer('AssetImage', 'package:flutter/painting.dart')
+                            .newInstance(
                           [
                             literalString("assets/${encodedImagePath(image)}"),
                           ],
@@ -72,7 +70,8 @@ String generateImagePage(FileSystemEntity image, String projectName) {
         [
           Directive.import('package:flutter/material.dart'),
           Directive.import(
-              'package:$projectName/generated/golden_image_container.dart'),
+            'package:$projectName/generated/golden_image_container.dart',
+          ),
         ],
       ),
   );

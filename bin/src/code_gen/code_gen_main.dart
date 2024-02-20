@@ -13,7 +13,11 @@ String generateMainFile(String projectName) {
       ..returns = refer('void')
       ..body = Block.of(
         [
-          refer('runApp').call([refer('const StorybookApp()')]).statement,
+          refer('runApp').call(
+            [
+              refer('const StorybookApp()'),
+            ],
+          ).statement,
         ],
       ),
   );
@@ -23,11 +27,14 @@ String generateMainFile(String projectName) {
       ..body.add(method)
       ..directives.addAll(
         [
-          Directive.import('package:storybook_flutter/storybook_flutter.dart'),
-          Directive.import('package:flutter/material.dart'),
-          Directive.import('package:$projectName/generated/$storiesFileName'),
           Directive.import(
-              'package:$projectName/generated/$deviceFrameFileName'),
+            'package:storybook_flutter/storybook_flutter.dart',
+          ),
+          Directive.import('package:flutter/material.dart'),
+          Directive.import('generated/$storiesFileName'),
+          Directive.import(
+            'package:$projectName/generated/$deviceFrameFileName',
+          ),
         ],
       ),
   );
